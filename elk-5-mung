@@ -1,0 +1,10 @@
+##### install kibana 5 alpha 5 #####
+
+curl -O https://download.elastic.co/kibana/kibana/kibana-5.0.0-alpha5-x86_64.rpm
+rpm -Uvh kibana-5.0.0-alpha5-x86_64.rpm
+
+systemctl daemon-reload &&  systemctl enable kibana.service && systemctl start kibana.service
+
+#### Installing elasticsearch 5 alpha 5 ####
+
+curl -O https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/5.0.0-alpha5/elasticsearch-5.0.0-alpha5.rpm && rpm -Uvh elasticsearch-5.0.0-alpha5.rpm && systemctl daemon-reload && systemctl enable elasticsearch.service && systemctl start elasticsearch.service

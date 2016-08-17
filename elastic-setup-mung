@@ -1,0 +1,69 @@
+## Elasticsearch setup file
+
+...
+Install tools and config settings to come
+
+...
+
+install Java Oracle JDK version 1.8.0_101 (_73 preferred) from:
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+direct link: http://download.oracle.com/otn-pub/java/jdk/8u101-b13/jdk-8u101-linux-x64.rpm
+
+copy to elk machine with winscp if needed
+
+install with:
+
+rpm -Uvh ~/jdk-8u101-linux-x64.rpm
+export JAVA_HOME=/usr/java/jdk1.8.0_101/
+
+install official repo (https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html)
+
+rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+Add repo info to /etc/yum.repos.d/elasticsearch.repo
+
+[elasticsearch-2.x]
+name=Elasticsearch repository for 2.x packages
+baseurl=https://packages.elastic.co/elasticsearch/2.x/centos
+gpgcheck=1
+gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+
+Install with:
+yum -y update && yum -y install elasticsearch
+
+change memory size in: /etc/elasticsearch/jvm.options
+change ports and other config like mast/slave and clustering in: /etc/elasticsearch/elasticsearch.yml 
+
+start with:
+systemctl start elasticsearch
+
+
+
+----- manual install -----
+:x
+cd /opt/
+
+Download elasticsearch:
+curl -L -O https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.4/elasticsearch-2.3.4.tar.gz
+
+Extract tarball:
+tar -xvf elasticsearch-2.3.4.tar.gz
+
+create elasticsearch user with:
+adduser elasticsearch
+
+add user permissions to folders with 
+chown -R elasticsearch /opt/elasticsearch-2.3.4
+
+Test elasticsearch works with user:
+runuser -l elasticsearch -c '/opt/elasticsearch-2.3.4/bin/elasticsearch'
+
+
+Change the config as needed in:
+/opt/elasticsearch-2.3.4/config/elasticsearch.yml
+
+
+more details here:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-dir-layout.html
